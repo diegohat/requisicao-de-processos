@@ -29,8 +29,11 @@ O programa recebe os valores dos arquivos do disco, tokeniza e conta os tokens +
 O mesmo processo ocorre durante a matriz de processos com apenas uma ressalva. Os valores de PAGE (A3 ou A4) são guardados na mesma linha do processo com os valores de BLOCK (03 ou 06).
 
 A mémoria é carregada como uma matriz de 3 linhas onde cada linha tem uma utilização.
+
 LINHA 1: Recebe os valores de PAGE do processo;
+
 LINHA 2: Recebe os valores de BLOCK do processo;
+
 LINHA 3: Recebe o valor referente ao PAGE,BLOCK dentro do arquivo.
 
 Essa matriz é inicializada com valores 0 e depois em seguida preenchida através da linha referente ao processo que é passado como parâmetro.
@@ -40,6 +43,10 @@ O preenchimento da matriz memória ocorre da seguinte maneira: Os valores impare
 Existe uma verificação onde se é verificado se a posição na matriz está vazia e se ocorre a repetição de alguma solicitação dos processos. Juntamente da verificação é realizada a contagem de page miss.
 
 Simultaneamente ocorre a remoção dos valores de dentro do disco. A remoção ocorre substituindo esses valores por -1.
+
+# Melhor forma de organização da memória
+
+A melhor maneira de organizar a memória seria utilizar uma estrutura de fila. FIFO.
 
 
 
