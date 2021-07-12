@@ -2,6 +2,7 @@
 #define MEM_SIZE 5
 #define SWAP_SIZE 10
 #define SIZE 3
+#define PROCESS_NUMBER 3
 
 int main(void)
 {
@@ -9,7 +10,6 @@ int main(void)
     int disk_cols = 0;
     int process_lines = 0;
     int process_cols = 0;
-    int p_count = 3;
     int pagemiss = 0;
 
     DiskSize("arquivos_exemplo.txt", &disk_lines, &disk_cols);
@@ -32,7 +32,7 @@ int main(void)
 
     SwapInitialize(SIZE, SWAP_SIZE, m_swap);
 
-    MemoryLoad(p_count, SIZE, MEM_SIZE, m_memory, process_lines, process_cols, m_process, SIZE, SWAP_SIZE, m_swap, disk_lines, disk_cols, m_disk, &pagemiss);
+    MemoryLoad(PROCESS_NUMBER, SIZE, MEM_SIZE, m_memory, process_lines, process_cols, m_process, SIZE, SWAP_SIZE, m_swap, disk_lines, disk_cols, m_disk, &pagemiss);
 
     printf("\nDISCO:\n\n");
 
@@ -41,17 +41,6 @@ int main(void)
         for(int j = 0; j < disk_cols; j++)
         {
             printf("%i\t", m_disk[i][j]);
-        }
-        printf("\n");
-    }
-
-    printf("\n\nPROCESSOS:\n\n");
-
-    for(int i = 0; i < process_lines; i++)
-    {
-        for(int j = 0; j < process_cols; j++)
-        {
-            printf("%i\t", m_process[i][j]);
         }
         printf("\n");
     }
@@ -67,16 +56,30 @@ int main(void)
         printf("\n");
     }
 
-    printf("\n\nMEMÓRIA SWAP INICIALIZADA:\n\n");
+    printf("PAGEMISS: %i\n", pagemiss);
 
-    for(int i = 0; i < SIZE; i++)
+
+    MemoryFree(SIZE, MEM_SIZE, m_memory, SIZE, SWAP_SIZE, m_swap, disk_lines, disk_cols, m_disk);
+
+    printf("\nDISCO:\n\n");
+
+    for(int i = 0; i < disk_lines; i++)
     {
-        for(int j = 0; j < SWAP_SIZE; j++)
+        for(int j = 0; j < disk_cols; j++)
         {
-            printf("%i\t", m_swap[i][j]);
+            printf("%i\t", m_disk[i][j]);
         }
         printf("\n");
     }
 
-    printf("PAGEMISS: %i\n", pagemiss);
+    printf("\n\nMEMÓRIA INICIALIZADA:\n\n");
+
+    for(int i = 0; i < SIZE; i++)
+    {
+        for(int j = 0; j < MEM_SIZE; j++)
+        {
+            printf("%i\t", m_memory[i][j]);
+        }
+        printf("\n");
+    }
 }
